@@ -1,13 +1,27 @@
-// initialize variables
+
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
 var words = ['bat'];
-var lengthOfWord = words.length;
-var wrongGuessesLeft = words.length;
-var lettersGuessed = [];
-var numLettersKnown = 0;
-var guessedSoFar = '';
+var secretWord = ''; // word to be guessed
+var wrongGuessesLeft;
+var lettersGuessed;
+var numLettersKnown;
+var guessedSoFar;
+var gameOutcome;
+  // TODO delete these?
+var userGuess;
+var firstKeyUp;
 
-// Define functions
+/*
+RESUME: code runs once without any key press. It then listens for keypress,
+but does not progress. This must be some function of calling the event handler
+getKeyPress. The call to it inside of getUserGuess does not return, apparently.
+Actions:
+1) Look at examples from class
+2) Think about ripping out the event handler. just using a function call like
+in the rps game worked, except the game executed once through before starting to 
+listen for keypresses - even though a keypress had not occurrd.
+3) Ask for help, or look at event handlers
+*/
 
 // function celebrateWin
 // play happy sound and display congratulations
@@ -15,42 +29,135 @@ var guessedSoFar = '';
 // function declareLoss
 // play sad sound and commiserate
 
-// function gameInfo -- displays initial and updated info on game
-//  how many letters in word
-//  how many wrong guesses left
-//  letters guessed
-//  prompt user to press a key
+function getGameInfo() {
+  //  maintains info on game and prompts for key press
+  var wordForScreen = makeWordForScreen();
+  return ("<p>Your mystery word is: " + wordForScreen + "</p><br>" +
+         "<p>Wrong guesses left: " + wrongGuessesLeft + "</p><br>" +
+         "<p>Letters guessed so far: " + lettersGuessed +  "</p><br>" +
+         "<p>Make your best guess at letter to fill in a blank!</p>");
+}
 
-// getRandomWord
-// computer selects word at random from words and returns it
+function getRandomWord() {
+  // computer returns randomly selected word
+  // TODO add random selection
+  return words[Math.floor(Math.random() * words.length)]
+}
 
-// function getUserGuess
-/// get user keypress
-// accept upper or lower case letters; convert upper case to lower case
-// reject non-letters and prompt for a letter
+function getUserGuess() {
+  // gets result of user keypress and normalizes it
+  console.log('In getUserGuess');
+  document.onkeypress = getKeyPress;
+  // var userGuess = getKeyPress();
+  console.log('User guessed ' + userGuess);
 
-// function guessResult
-// take user guess and compare with word
-// if letter in word one or more times, update guessedSoFar and numLettersKnown
-// if letter not in word, update wrongGuessesLeft
-// if numLettersKnown = lengthOfWord, call celebrateWin
-// if wrongGuessesLeft = 0, call declareLoss
-// else continue loop
+  // TODO: // reject non-letters and prompt for a letter
+  console.log('userGuess is: ' + userGuess);
+  return userGuess.toLowerCase();
+}
 
-// Game
-// display welcome to game
-// Get key press to start game loop
-document.onkeyup = function(event) {
+function getKeyPress(event) {
+  console.log('in getKeyPress')
+  // document.onkeyup = function(event) {
+  userGuess = event.key;
+  console.log('user guessed ' + userGuess);
+}
 
-// computer gets word from getRandomWork
+function guessResult(userGuess) {
+  // take user guess and compare with word
+  var outcome = "";
+  console.log('guessResult received ' + userGuess);
+  // TODO reject if letter has been guessed before
+  // determine if letter in word at least once
+  if (secretWord.indexOf(userGuess) > -1) {
+    console.log('user guessed correctly')
+    // TODO: check if letter appears multiple times in word, using 
+    // <string>.indexOf(<value>, <starting_index>) 
+    // TODO: update guessedSoFar and numLettersKnown and ???
+    // TODO: determine if user has guessed complete word and end loop
+  }
+  else {
+    // update wrongGuessesLeft
+    // if wrongGuessesLeft = 0, outcome = 'lost';
+    // else outcome = 'continue';
+  }
+  // TODO: determine result programmatically in if .. else.. above
+  return 'won';
+}
 
-// display initial info via call to gameInfo
+function init() {
+  console.log('in init');
+  main();
+}
 
-// get user input via getUserGuess
+function initializeGlobals() {
+  // initializes global vars for individual play of game
+  secretWord = getRandomWord();
+  wrongGuessesLeft = secretWord.length;
+  lettersGuessed = [];
+  numLettersKnown = 0;
+  guessedSoFar = [];
+  gameOutcome = "";
+  // TODO delete this?
+  userGuess = "";
+}
 
-// determine outcome of guess via guessResult
+function makeWordForScreen() {
+  // maintains display of word begin guessed
+  // TODO: decide if needs parameters and add logic for update
+  var wordForScreen = []
+  for (var i = 0; i < secretWord.length; i++ ) {
+    wordForScreen.push(' _ ');
+  }
+  return wordForScreen;
+}
 
-} // end of game loop started at onkeyup
+// GAME
+function main() {
+// HTML displays initial welcome to game
+// Start play
+// document.onkeyup = function(event) {
+  var notDone = true; //
+  var displayArea = document.querySelector("#game");
+  // start outer loop for multiple plays
+  while (notDone) {
+    console.log('outer loop started');
+    var gameInPlay = true;
+    // start middle loop for individual play of game
+    while (gameInPlay) {
+      initializeGlobals();
+      console.log('Secret word is: ' + secretWord);
+      // display initial info
+      var gameInfo = getGameInfo();
+      displayArea.innerHTML = gameInfo;
+      // start inner loop for guessing and evaluation
+      var stillGuessing = true;
+      var userGuess = "";
+      var guessOutcome = "";
+      while (stillGuessing) {
+        console.log('calling getUserGuess');
+        userGuess = getUserGuess();
+        guessOutcome = guessResult(userGuess);
+        if ((guessOutcome === 'won') || (guessOutcome === 'lost')) {
+          console.log('inside logic to continue or end inner loop');
+          stillGuessing = false;
+        }
+        console.log('player has guessed word or run out of guesses');
+      } // end inner loop
+      // TODO - set value programmatically
+      gameInPlay = false;
+      console.log('individual play over')
+    } // ends middle loop
+    // TODO: Ask user if she wants to play again and continue or quit accordingly
+    notDone = false; // ends outer loop of game play
+  }
+  console.log('game play over');
+
+// } // end of game loop started at onkeyup
+
+} // end of main
+
+window.onload = init;
 
 // TODO: convert to object
 // TODO: use to drive color coding of blocks

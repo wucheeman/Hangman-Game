@@ -8,6 +8,8 @@ bin-release/
 # Other files and folders
 .settings/
 assignment/
+snippets/
+temp_bak/
 
 # Executables
 *.swf
