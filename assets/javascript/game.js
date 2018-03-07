@@ -1,4 +1,6 @@
 
+// GLOBAL VARIABLES
+// ================
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
 var words = ['bat'];
 var secretWord = ''; // word to be guessed
@@ -11,24 +13,13 @@ var gameOutcome;
 var userGuess;
 var firstKeyUp;
 
-/*
-RESUME: code runs once without any key press. It then listens for keypress,
-but does not progress. This must be some function of calling the event handler
-getKeyPress. The call to it inside of getUserGuess does not return, apparently.
-Actions:
-1) Look at examples from class
-2) Think about ripping out the event handler. just using a function call like
-in the rps game worked, except the game executed once through before starting to 
-listen for keypresses - even though a keypress had not occurrd.
-3) Ask for help, or look at event handlers
-*/
 
-// function celebrateWin
-// play happy sound and display congratulations
+//RESUME: Use a button, as in snippets/button-example.html, not onkeyup and see
+// if that will fix the 'wait' problem 
+// thinks about using callback functions as with snippets/callback_example.html
 
-// function declareLoss
-// play sad sound and commiserate
-
+// FUNCTIONS
+// =========
 function getGameInfo() {
   //  maintains info on game and prompts for key press
   var wordForScreen = makeWordForScreen();
@@ -85,10 +76,11 @@ function guessResult(userGuess) {
   return 'won';
 }
 
-function init() {
-  console.log('in init');
-  main();
-}
+// TODO: Delete?
+// function init() {
+//   console.log('in init');
+//   main();
+// }
 
 function initializeGlobals() {
   // initializes global vars for individual play of game
@@ -114,9 +106,6 @@ function makeWordForScreen() {
 
 // GAME
 function main() {
-// HTML displays initial welcome to game
-// Start play
-// document.onkeyup = function(event) {
   var notDone = true; //
   var displayArea = document.querySelector("#game");
   // start outer loop for multiple plays
@@ -151,15 +140,11 @@ function main() {
     // TODO: Ask user if she wants to play again and continue or quit accordingly
     notDone = false; // ends outer loop of game play
   }
-  console.log('game play over');
-
-// } // end of game loop started at onkeyup
-
 } // end of main
 
-window.onload = init;
 
-// TODO: convert to object
-// TODO: use to drive color coding of blocks
-// TODO: extend to some theme
-// TODO: use window.onload and init rather than onkeyup
+// TODO delete?
+// document.onkeyup = function(event) {
+//   console.log('hello');
+//   main();
+// } // end of game loop started at onkeyup
