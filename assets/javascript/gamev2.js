@@ -1,5 +1,5 @@
 // GLOBALS
-
+// =============================================================================
 var displayArea = document.querySelector("#game");
 var gameOutcome;
 var guessedSoFar;
@@ -9,13 +9,16 @@ var secretWord = ''; // word to be guessed
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
 var words = ['bat'];
 var wrongGuessesLeft;
-
-  // TODO delete these?
 var userGuess;
-var firstKeyUp;
-
 
 // FUNCTIONS
+//==============================================================================
+function continueOrEndGame() {
+  console.log("In continueOrEndGame(")
+  // Determines if user has guessed complete word or run out of guesses
+  // TODO: add parameters if needed and logic
+  return 'win'; // scaffolding
+}
 
 function getGameInfo() {
   //  maintains info on game and prompts for key press
@@ -28,8 +31,23 @@ function getGameInfo() {
 
 function getRandomWord() {
   // computer returns randomly selected word
-  // TODO add random selection
   return words[Math.floor(Math.random() * words.length)]
+}
+
+function getResult(userGuess) {
+  console.log('getResult was sent ' + userGuess);
+  result = [];
+  // TODO reject if letter has been guessed before
+  if (secretWord.indexOf(userGuess) > -1) {
+    // TODO determine index of first occurrence and put it into guessOutcome
+    // Be sure this is not just reprising 'indexOf()'. Return empty [] if letter
+    // not in word
+    result.push(0); // scaffolding, assumes guess of 'b'
+    console.log(result);
+    // TODO: check if letter appears multiple times in word, using 
+    // <string>.indexOf(<value>, <starting_index>)
+    return result;
+  }
 }
 
 function getUserGuess(event) {
@@ -45,7 +63,6 @@ function initializeGlobals() {
   numLettersKnown = 0;
   guessedSoFar = [];
   gameOutcome = "";
-  // TODO delete this?
   userGuess = "";
 }
 
@@ -56,7 +73,7 @@ function makeWordForScreen() {
   var wordForScreen = []
   for (var i = 0; i < secretWord.length; i++ ) {
     wordForScreen.push(' _ ');
-  }
+  }//
   return wordForScreen;
 }
 
@@ -67,17 +84,46 @@ function setUpGame() {
   displayArea.innerHTML = getGameInfo();
 }
 
+function updateCounters() {
+  //TODO: add parameter and logic to update counters
+  // including guessedSoFar and numLettersKnown and ???
+  console.log("In updateCounters");
+}
+
+function updateDisplays() {
+  console.log("in updateDisplays");
+  // TODO: add parameter and logic to update displays
+}
+
+function updateGameState(guessResult) {
+  updateCounters(); // TODO: add arguments as needed
+  updateDisplays(); // TODO: add arguments as needed
+}
 
 // GAME
+//==============================================================================
 // single play of hangman
 function main() {
+  console.log("starting game in main");
+  var guessResult = [];
+  var gameStatus = "continue";
+  var gameNotOver = true;
   setUpGame();
-  // loop until game is over
-  document.onkeyup = function(e) {
-    console.log("it's on!");
-    userGuess = getUserGuess(e);
-    console.log("userGuess is: " + userGuess);
-    // RESUME compare to word and update display
-
-  } // end of loop started with onkeyup
+  // start looping until single play is over
+//  while (gameNotOver) {
+    document.onkeyup = function(e) {
+      console.log("it's on!");
+      userGuess = getUserGuess(e);
+      console.log("userGuess is: " + userGuess);
+      guessResult = getResult(userGuess);
+      console.log("guessResult is: " + guessResult);
+      updateGameState(guessResult);
+      gameStatus = continueOrEndGame();
+      console.log("gameStatus is: " + gameStatus);
+      // decide to keep looping or celebrate win/commiserate loss
+      // with celebrateWin or consoleForLoss
+      // TODO: add logic to play another round or quit
+      // use window.location.reload(); to force page refresh/play another round
+      // use window.close() to close; say 'ok bye and set timer first -- it's abrupt!
+    } // end of onkeyup function
 } // end of main
