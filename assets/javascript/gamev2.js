@@ -8,7 +8,7 @@ var numLettersKnown;
 var secretWord = ''; // word to be guessed
 var wordForScreen = '';
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
-var words = ['bat'];
+var words = ['battle']; // test with 'battlement' next
 var wrongGuessesLeft;
 var userGuess;
 
@@ -20,7 +20,7 @@ function askToPlayAgain() {
   // TODO: puts ups a button that calls playOn() and another button that calls
   // stop()
   // TODO delete next few lines when logic has been filled in
-  var goOn = confirm("Press 'OK to play again and 'Cancel to quit");
+  var goOn = confirm("Press 'OK' to play again and 'Cancel' to quit");
   console.log("goOn = " + goOn);
   if (goOn) {
     playOn(); // TODO collapse to this function?
@@ -42,9 +42,14 @@ function commiserateLoss() {
 
 function continueOrEndGame() {
   console.log("In continueOrEndGame");
-  // Determines if user has guessed complete word or run out of guesses
-  // TODO: add parameters if needed and logic
-  return 'win'; // scaffolding
+  // user has guessed complete word
+  if (numLettersKnown === numLettersNeeded){
+    return 'win';
+  }
+  else if (wrongGuessesLeft === 0) {
+    return 'lose';
+  }
+  return 'continue';
 }
 
 function getGameInfo() {
@@ -76,12 +81,14 @@ function getResult(userGuess) {
   index = secretWord.indexOf(userGuess);
   if (index > -1) {
     result.push(index);
-    // TODO: check if letter appears multiple times in word, using 
+    // Check if letter appears multiple times in word
     // <string>.indexOf(<value>, <starting_index>)
   }
   // letter is not in word
   console.log(result);
   return result;
+
+  
 }
 // Done
 function getUserGuess(event) {
@@ -146,7 +153,7 @@ function stop() {
   // TODO: say 'ok bye and set timer for a short period.
   window.close(); 
 }
-
+// Done
 function updateCounters(result) {
   //Updates global counters with outcome of guess
   console.log("In updateCounters");
@@ -183,9 +190,8 @@ function yayOrNay(gameStatus) {
   // if reach here, game is not over
 }
 
-// RESUME: Complete continueOrEndGame() for simple case - winning and then losing.
-// After that, start completing todos, esp. case with 2+ of same letter in wor.
-// Keep dcommiting changes each time I finish work on a function. No need to push
+// RESUME: Start completing todos, esp. case with 2+ of same letter in wor.
+// Keep commiting changes each time I finish work on a function. No need to push
 // every change.
 
 // GAME
@@ -207,8 +213,7 @@ function main() {
       updateGameState(guessResult);
       gameStatus = continueOrEndGame();
       console.log("gameStatus is: " + gameStatus);
-      // TODO: uncomment when useful to go around again
-      // yayOrNay(gameStatus);
+      yayOrNay(gameStatus);
       // game not over, so loop around
     } // end of onkeyup function
 } // end of main
