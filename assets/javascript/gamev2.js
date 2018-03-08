@@ -77,19 +77,22 @@ function getRandomWord() {
 function getResult(userGuess) {
   console.log('getResult was sent ' + userGuess);
   var result = []; // array needed for repeated letter case
-  // TODO reject if letter has been guessed before
-  index = secretWord.indexOf(userGuess);
-  if (index > -1) {
-    result.push(index);
-    // Check if letter appears multiple times in word
-    // <string>.indexOf(<value>, <starting_index>)
+  var searchIndex = 0;
+  while (searchIndex > -1) {
+    index = (secretWord.indexOf(userGuess, searchIndex));
+    if (index > -1) {
+      console.log(index);
+      result.push(index);
+      searchIndex = index;
+    }
+    else {
+      searchIndex = -1;
+    }
+    console.log(result);
+    return result;
   }
-  // letter is not in word
-  console.log(result);
-  return result;
-
-  
 }
+
 // Done
 function getUserGuess(event) {
   // gets result of user keypress and normalizes it
@@ -191,6 +194,9 @@ function yayOrNay(gameStatus) {
 }
 
 // RESUME: Start completing todos, esp. case with 2+ of same letter in wor.
+// NEXT segregate all interaction with the DOM into a single 'render' function.
+// Consider throwing away the entire exising DOM and rewriting it with that function
+// each time.
 // Keep commiting changes each time I finish work on a function. No need to push
 // every change.
 
