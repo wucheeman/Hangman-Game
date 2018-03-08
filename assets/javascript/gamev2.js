@@ -55,7 +55,7 @@ function getGameInfo() {
          "<p>Letters guessed so far: " + lettersGuessed +  "</p><br>" +
          "<p>Make your best guess at a letter to fill in a blank and then press a key!</p>");
 }
-// Done for 'bat
+// Done for 'bat'
 function getNumLettersNeeded(){
   // Returns number of letters needed to get correct answer. Counts duplicated
   // letters once
@@ -83,7 +83,6 @@ function getResult(userGuess) {
   console.log(result);
   return result;
 }
-
 // Done
 function getUserGuess(event) {
   // gets result of user keypress and normalizes it
@@ -104,6 +103,7 @@ function initializeGlobals() {
 }
 
 function makeInitialWordForScreen() {
+  // TODO collapse into makeWordForScreen?
   var tempWord = '';
   for (var i = 0; i < secretWord.length; i++ ) {
     tempWord = tempWord + '_'; // TODO - make more legible, e.g. ' _ '
@@ -150,12 +150,14 @@ function stop() {
 function updateCounters(result) {
   //Updates global counters with outcome of guess
   console.log("In updateCounters");
-  if (result) {
+  // tests for array with info on correct guess
+  if (result.length !== 0) {
     console.log("Updating counters for a correct guess");
     lettersGuessed.push(userGuess);
     lettersGuessed.sort(); // can this be combined with the line above?
     numLettersKnown++;
   }
+  // array is empty from incorrect guess
   else {
     console.log("Updating counters for an incorrect guess");
     wrongGuessesLeft--;
@@ -165,7 +167,7 @@ function updateCounters(result) {
 function updateGameState(guessResult) {
   updateCounters(guessResult); // TODO: add arguments as needed
   makeWordForScreen(userGuess);
-  getGameInfo(); // TODO: add arguments as needed
+  displayArea.innerHTML = getGameInfo();
 }
 
 // Done
@@ -181,10 +183,9 @@ function yayOrNay(gameStatus) {
   // if reach here, game is not over
 }
 
-// RESUME: review current status by tracing flow through
-// for correct guess. Write functionality to update
-// screen. Next add support for incorrect guess. Start commiting
-// changes each time I finish work on a function. No need to push
+// RESUME: Complete continueOrEndGame() for simple case - winning and then losing.
+// After that, start completing todos, esp. case with 2+ of same letter in wor.
+// Keep dcommiting changes each time I finish work on a function. No need to push
 // every change.
 
 // GAME
