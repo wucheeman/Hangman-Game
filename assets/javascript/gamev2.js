@@ -60,20 +60,31 @@ function getGameInfo() {
          "<p>Letters guessed so far: " + lettersGuessed +  "</p><br>" +
          "<p>Make your best guess at a letter to fill in a blank and then press a key!</p>");
 }
-// Done for 'bat'
+
 function getNumLettersNeeded(){
   // Returns number of letters needed to get correct answer. Counts duplicated
   // letters once
-  // TODO: add logic to parse secretWord
-  return 3; // good for first word
+  var distinctLetters = []
+  for (i = 0; i < secretWord.length; i++) {
+    // if secretWord[i] not in distinctLetters { // need to figure out how to do this!
+    //   distinctLetters.push(secretWord[i]);
+    // USE  Code like this:
+            // function isInArray(value, array) {
+            //   return array.indexOf(value) > -1;
+            // }
+
+            // Execution:
+
+            // isInArray(1, [1,2,3]); // true
+  }
+  return distinctLetters.length;
 }
 
 function getRandomWord() {
   // computer returns randomly selected word
   return words[Math.floor(Math.random() * words.length)]
 }
-
-// done for 'bat' without repeated guess of same letter
+// done
 function getResult(userGuess) {
   console.log('getResult was sent ' + userGuess);
   var result = []; // array needed for repeated letter case
@@ -92,7 +103,6 @@ function getResult(userGuess) {
     return result;
   }
 }
-
 // Done
 function getUserGuess(event) {
   // gets result of user keypress and normalizes it
@@ -193,10 +203,12 @@ function yayOrNay(gameStatus) {
   // if reach here, game is not over
 }
 
-// RESUME: Start completing todos, esp. case with 2+ of same letter in wor.
+// RESUME: Update getNumLettersNeeded() and continue to complete code to handle
+// case with 2+ of same letter in word. Test!!!
 // NEXT segregate all interaction with the DOM into a single 'render' function.
 // Consider throwing away the entire exising DOM and rewriting it with that function
-// each time.
+// each time. - update javascript notes - this is a practice that helps save
+// troubleshooting headaches.
 // Keep commiting changes each time I finish work on a function. No need to push
 // every change.
 
