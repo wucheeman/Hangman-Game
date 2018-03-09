@@ -66,16 +66,9 @@ function getNumLettersNeeded(){
   // letters once
   var distinctLetters = []
   for (i = 0; i < secretWord.length; i++) {
-    // if secretWord[i] not in distinctLetters { // need to figure out how to do this!
-    //   distinctLetters.push(secretWord[i]);
-    // USE  Code like this:
-            // function isInArray(value, array) {
-            //   return array.indexOf(value) > -1;
-            // }
-
-            // Execution:
-
-            // isInArray(1, [1,2,3]); // true
+    if (!isInArray(secretWord[i], distinctLetters)) {
+      distinctLetters.push(secretWord[i]);
+    }
   }
   return distinctLetters.length;
 }
@@ -116,12 +109,17 @@ function initializeGlobals() {
   lettersGuessed = [];
   numLettersKnown = 0;
   numLettersNeeded = getNumLettersNeeded();
+  console.log('numLettersNeeded = ' + numLettersNeeded);
   // guessedSoFar = []; TODO: delete?
   gameOutcome = "";
   userGuess = "";
   wordForScreen = makeInitialWordForScreen();
 }
-
+// Done
+function isInArray(value, array) {
+  return (array.indexOf(value) > -1);
+}
+//done
 function makeInitialWordForScreen() {
   // TODO collapse into makeWordForScreen?
   var tempWord = '';
@@ -206,9 +204,6 @@ function yayOrNay(gameStatus) {
 // RESUME: Update getNumLettersNeeded() and continue to complete code to handle
 // case with 2+ of same letter in word. Test!!!
 // NEXT segregate all interaction with the DOM into a single 'render' function.
-// Consider throwing away the entire exising DOM and rewriting it with that function
-// each time. - update javascript notes - this is a practice that helps save
-// troubleshooting headaches.
 // Keep commiting changes each time I finish work on a function. No need to push
 // every change.
 
