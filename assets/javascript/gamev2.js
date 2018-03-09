@@ -7,7 +7,7 @@ var numLettersKnown;
 var secretWord = ''; // word to be guessed
 var wordForScreen = '';
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
-var words = ['bat']; // test with 'battlement' next
+var words = ['bat', 'battlement', 'lemming', 'zebra', 'automobile'];
 var wrongGuessesLeft;
 var userGuess;
 
@@ -31,6 +31,7 @@ function askToPlayAgain() {
 
 function celebrateWin() {
   // TODO: build screen to say you won! and put up buttons for continue or quit
+  // TODO: update after commiserateLoss has solved problem of premature game end
   console.log('Yay, you won!');
   // TODO: add audio player as with commiserateLoss
 }
@@ -39,6 +40,8 @@ function commiserateLoss() {
   // TODO: build screen to say you lost! and put up buttons for continue or quit
   console.log('Boohoo, you lost!');
   // TODO: uncomment when ready to replace prompt with buttons
+  // This code works, but game triggers confirm too quickly and it doesn't get 
+  // play song/update screen
   // var endGameSong = document.getElementById("audioplayer");
   // endGameSong.innerHTML = '<audio controls autoplay src="assets/audio/st_james.mp3"/>';
   // message = '<p>So sorry, you lost!</p>';
