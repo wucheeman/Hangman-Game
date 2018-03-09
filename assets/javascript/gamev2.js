@@ -1,14 +1,13 @@
-// GLOBALS
+// GLOBAL VARIABLES
 // =============================================================================
 var displayArea = document.querySelector("#game");
 var gameOutcome;
-// var guessedSoFar; TODO delete?
 var lettersGuessed;
 var numLettersKnown;
 var secretWord = ''; // word to be guessed
 var wordForScreen = '';
 // TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
-var words = ['battle']; // test with 'battlement' next
+var words = ['bat']; // test with 'battlement' next
 var wrongGuessesLeft;
 var userGuess;
 
@@ -31,13 +30,19 @@ function askToPlayAgain() {
 }
 
 function celebrateWin() {
-  // TODO: build screen to say you won!
+  // TODO: build screen to say you won! and put up buttons for continue or quit
   console.log('Yay, you won!');
+  // TODO: add audio player as with commiserateLoss
 }
 
 function commiserateLoss() {
-  // TODO: build screen to say you won!
+  // TODO: build screen to say you lost! and put up buttons for continue or quit
   console.log('Boohoo, you lost!');
+  // TODO: uncomment when ready to replace prompt with buttons
+  // var endGameSong = document.getElementById("audioplayer");
+  // endGameSong.innerHTML = '<audio controls autoplay src="assets/audio/st_james.mp3"/>';
+  // message = '<p>So sorry, you lost!</p>';
+  // updateDisplay(message);
 }
 
 function continueOrEndGame() {
@@ -200,14 +205,11 @@ function yayOrNay(gameStatus) {
   }
   else if (gameStatus == 'lose') {
     commiserateLoss()
+    console.log("back from commiserateLoss");
     askToPlayAgain();
   }
   // if reach here, game is not over
 }
-
-// RESUME: Segregate all interaction with the DOM into a single 'render' function.
-// Keep commiting changes each time I finish work on a function. No need to push
-// every change.
 
 // GAME
 //==============================================================================
