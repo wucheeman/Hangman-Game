@@ -80,20 +80,20 @@ function getRandomWord() {
 // done
 function getResult(userGuess) {
   console.log('getResult was sent ' + userGuess);
-  var result = []; // array needed for repeated letter case
+  var indexResult = []; // indices where letter appears i secretWord
   var searchIndex = 0;
   while (searchIndex > -1) {
     index = (secretWord.indexOf(userGuess, searchIndex));
     if (index > -1) {
       console.log(index);
-      result.push(index);
+      indexResult.push(index);
       searchIndex = index;
     }
     else {
       searchIndex = -1;
     }
-    console.log(result);
-    return result;
+    console.log(indexResult);
+    return indexResult;
   }
 }
 // Done
@@ -165,14 +165,14 @@ function stop() {
   window.close(); 
 }
 // Done
-function updateCounters(result) {
+function updateCounters(guessResult) {
   //Updates global counters with outcome of guess
   console.log("In updateCounters");
+  lettersGuessed.push(userGuess);
+  lettersGuessed.sort(); // can this be combined with the line above?
   // tests for array with info on correct guess
-  if (result.length !== 0) {
+  if (guessResult.length !== 0) {
     console.log("Updating counters for a correct guess");
-    lettersGuessed.push(userGuess);
-    lettersGuessed.sort(); // can this be combined with the line above?
     numLettersKnown++;
   }
   // array is empty from incorrect guess
@@ -201,9 +201,7 @@ function yayOrNay(gameStatus) {
   // if reach here, game is not over
 }
 
-// RESUME: Update getNumLettersNeeded() and continue to complete code to handle
-// case with 2+ of same letter in word. Test!!!
-// NEXT segregate all interaction with the DOM into a single 'render' function.
+// RESUME: Segregate all interaction with the DOM into a single 'render' function.
 // Keep commiting changes each time I finish work on a function. No need to push
 // every change.
 
