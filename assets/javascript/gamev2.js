@@ -60,7 +60,7 @@ function getGameInfo() {
          "<p>Letters guessed so far: " + lettersGuessed +  "</p><br>" +
          "<p>Make your best guess at a letter to fill in a blank and then press a key!</p>");
 }
-
+//done
 function getNumLettersNeeded(){
   // Returns number of letters needed to get correct answer. Counts duplicated
   // letters once
@@ -156,7 +156,7 @@ function setUpGame() {
   initializeGlobals();
   console.log('the secret word is: ' + secretWord);
   // display initial info
-  displayArea.innerHTML = getGameInfo();
+  updateDisplay(getGameInfo());
 }
 // Done until refinement time
 function stop() {
@@ -182,10 +182,14 @@ function updateCounters(guessResult) {
   }
 }
 
+function updateDisplay(message) {
+  displayArea.innerHTML = message;
+}
+
 function updateGameState(guessResult) {
   updateCounters(guessResult); // TODO: add arguments as needed
   makeWordForScreen(userGuess);
-  displayArea.innerHTML = getGameInfo();
+  updateDisplay(getGameInfo());
 }
 
 // Done
