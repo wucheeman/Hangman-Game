@@ -40,20 +40,21 @@ function askToPlayAgain() {
 }
 
 function celebrateWin() {
-  // TODO: build screen to say you won! and put up buttons for continue or quit
-  // TODO: update after commiserateLoss has solved problem of premature game end
   console.log('Yay, you won!');
-  // TODO: add audio player as with commiserateLoss
+  // play song/update screen
+  var endGameSong = document.getElementById("audioplayer");
+  // add attribute 'controls' to audio tag to make them visible
+  endGameSong.innerHTML = '<audio autoplay src="assets/audio/hallelujah.mp3"/>';
+  message = '<p>Congratulations, you\'ve won!</p>';
+  updateDisplay(message);
 }
 
 function commiserateLoss() {
-  // TODO: build screen to say you lost! and put up buttons for continue or quit
   console.log('Boohoo, you lost!');
-  // TODO: uncomment when ready to replace prompt with buttons
-  // This code works, but game triggers confirm too quickly and it doesn't get 
   // play song/update screen
   var endGameSong = document.getElementById("audioplayer");
-  endGameSong.innerHTML = '<audio controls autoplay src="assets/audio/st_james.mp3"/>';
+  // add attribute 'controls' to audio tag to make them visible
+  endGameSong.innerHTML = '<audio autoplay src="assets/audio/funeral.mp3"/>';
   message = '<p>So sorry, you lost!</p>';
   updateDisplay(message);
 }
@@ -214,12 +215,13 @@ function updateGameState(guessResult) {
 function yayOrNay(gameStatus) {
   if (gameStatus == 'win') {
     celebrateWin();
-    askToPlayAgain();
+    setTimeout(askToPlayAgain, 5000);
   }
   else if (gameStatus == 'lose') {
     commiserateLoss()
     console.log("back from commiserateLoss");
-    askToPlayAgain();
+    setTimeout(askToPlayAgain, 5000);
+    // askToPlayAgain();
   }
   // if reach here, game is not over
 }
