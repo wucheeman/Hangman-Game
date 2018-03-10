@@ -1,3 +1,7 @@
+// RESUME: do a simple version of index.html to test Will's fix to askToPlayAgain
+// then marry up updated.html and the js so it works.
+
+
 // GLOBAL VARIABLES
 // =============================================================================
 var displayArea = document.querySelector("#game");
@@ -19,14 +23,20 @@ function askToPlayAgain() {
   // TODO: puts ups a button that calls playOn() and another button that calls
   // stop()
   // TODO delete next few lines when logic has been filled in
-  var goOn = confirm("Press 'OK' to play again and 'Cancel' to quit");
-  console.log("goOn = " + goOn);
-  if (goOn) {
-    playOn(); // TODO collapse to this function?
-  }
-  else {
-    stop();  // TODO collapse to this function?
-  }
+  // TODO: Will says this should work - test it with an old version of index.html
+  setTimeout(
+    () => {
+      var goOn = confirm("Press 'OK' to play again and 'Cancel' to quit");
+      console.log("goOn = " + goOn);
+      if (goOn) {
+        playOn(); // TODO collapse to this function?
+      }
+      else {
+        stop();  // TODO collapse to this function?
+      }
+    }
+  )
+
 }
 
 function celebrateWin() {
@@ -42,10 +52,10 @@ function commiserateLoss() {
   // TODO: uncomment when ready to replace prompt with buttons
   // This code works, but game triggers confirm too quickly and it doesn't get 
   // play song/update screen
-  // var endGameSong = document.getElementById("audioplayer");
-  // endGameSong.innerHTML = '<audio controls autoplay src="assets/audio/st_james.mp3"/>';
-  // message = '<p>So sorry, you lost!</p>';
-  // updateDisplay(message);
+  var endGameSong = document.getElementById("audioplayer");
+  endGameSong.innerHTML = '<audio controls autoplay src="assets/audio/st_james.mp3"/>';
+  message = '<p>So sorry, you lost!</p>';
+  updateDisplay(message);
 }
 
 function continueOrEndGame() {
