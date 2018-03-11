@@ -1,0 +1,25 @@
+HANGMAN TEST CASES
+
+Display
+=======
+[x] Initial display has all info shown correctly
+[x] Display updates correctly as game completes
+[x] In words with multiple of same letter, updates correctly
+[x] Display is correct when game is won
+[x] Display is correct when game is lost
+[x] Display is correct when play ceases
+
+Code logic
+==========
+[x] Recognizes when a 'good' letter has been guessed and behaves correctly
+[x] Recognizes when a 'bad' letter has been guessed and behaves correctly
+[x] Handles when same letter in word more than once
+[x] Stops individual play of game when player wins or loses
+
+
+Cleanup
+=======
+[] HTML validates
+[] CSS validates
+[] JS delinted (stretch)
+[] worthless comments or todos deleted
