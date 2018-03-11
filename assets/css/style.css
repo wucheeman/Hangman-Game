@@ -1,0 +1,29 @@
+hr {
+  /* width: 100%; */
+  color: darkgray;
+  height: 1px;
+  background-color:darkgray;
+}
+
+.mainPic {
+  background-image: url(../images/dod_1.jpg);
+  background-size: 300px;
+  width: 300px;
+  height: 200px;
+  border: 2px solid;
+  color: pink;
+}
+
+
+.quitButton{
+  float: right;
+}
+
+.tiledBackground {
+  background-image: url(../images/dod_1.jpg);
+  background-size: 150px;
+  width: 150px;
+  height: 100px;
+  border: 2px solid;
+  color: pink;
+}
