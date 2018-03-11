@@ -1,18 +1,13 @@
-// RESUME: do a simple version of index.html to test Will's fix to askToPlayAgain
-// then marry up updated.html and the js so it works.
-
 
 // GLOBAL VARIABLES
 // =============================================================================
 var displayArea = document.querySelector(".displayArea"); // was #game
-// var headerText = document.querySelector('#headerText'); //TODO delete
 var buttonArea = document.querySelector("#buttonArea");
 var gameOutcome;
 var lettersGuessed;
 var numLettersKnown;
 var secretWord = ''; // word to be guessed
 var wordForScreen = '';
-// TODO: start with single word, grow to 10 word array and as a stretch, use a file of words
 var words = ['bat', 'battlement', 'lemming', 'zebra', 'automobile'];
 var wrongGuessesLeft;
 var userGuess;
@@ -21,31 +16,11 @@ var userGuess;
 //==============================================================================
 // Done until single play is completed
 function askToPlayAgain() {
-  // Lets player decide to continue or quit
-  // TODO: puts ups a button that calls playOn() and another button that calls
-  // stop()
-  // TODO delete next few lines when logic has been filled in
-  // TODO: Will says this should work - test it with an old version of index.html
-  // setTimeout(
-    // () => {
-    //   var goOn = confirm("Press 'OK' to play again and 'Cancel' to quit");
-    //   console.log("goOn = " + goOn);
-    //   if (goOn) {
-    //     playOn(); // TODO collapse to this function?
-    //   }
-    //   else {
-    //     stop();  // TODO collapse to this function?
-    //   }
-    // }
-    // () => {
       updateButtonArea(makeTwoButtons());
-  //   }
-  // )
-
 }
 
 function celebrateWin() {
-  console.log('Yay, you won!');
+  // console.log('Yay, you won!');
   // play song/update screen
   var endGameSong = document.getElementById("audioplayer");
   // add attribute 'controls' to audio tag to make them visible
@@ -55,7 +30,7 @@ function celebrateWin() {
 }
 
 function commiserateLoss() {
-  console.log('Boohoo, you lost!');
+  // console.log('Boohoo, you lost!');
   // play song/update screen
   var endGameSong = document.getElementById("audioplayer");
   // add attribute 'controls' to audio tag to make them visible
@@ -65,7 +40,7 @@ function commiserateLoss() {
 }
 
 function continueOrEndGame() {
-  console.log("In continueOrEndGame");
+  // console.log("In continueOrEndGame");
   // user has guessed complete word
   if (numLettersKnown === numLettersNeeded){
     return 'win';
@@ -78,7 +53,7 @@ function continueOrEndGame() {
 
 function getGameInfo() {
   //  creates message relaying info on game and prompts for key press
-  console.log("In getGameInfo");
+  // console.log("In getGameInfo");
   return ("<h6>Press a key to make your best guess!</h6>" +
           "<hr>" +
           "<p>Your mystery word is: " + wordForScreen + "</p><br>" +
@@ -86,12 +61,6 @@ function getGameInfo() {
           "<p>Letters guessed so far: " + lettersGuessed +  "</p>");
 }
 
-// TODO: delete
-// function getNewHeaderText() {
-//   return ("Make your best guess at a letter to fill in a blank and then press a key!");
-// }
-
-//done
 function getNumLettersNeeded(){
   // Returns number of letters needed to get correct answer. Counts duplicated
   // letters once
@@ -110,20 +79,20 @@ function getRandomWord() {
 }
 // done
 function getResult(userGuess) {
-  console.log('getResult was sent ' + userGuess);
+  // console.log('getResult was sent ' + userGuess);
   var indexResult = []; // indices where letter appears i secretWord
   var searchIndex = 0;
   while (searchIndex > -1) {
     index = (secretWord.indexOf(userGuess, searchIndex));
     if (index > -1) {
-      console.log(index);
+      // console.log(index);
       indexResult.push(index);
       searchIndex = index;
     }
     else {
       searchIndex = -1;
     }
-    console.log(indexResult);
+    // console.log(indexResult);
     return indexResult;
   }
 }
@@ -140,8 +109,7 @@ function initializeGlobals() {
   lettersGuessed = [];
   numLettersKnown = 0;
   numLettersNeeded = getNumLettersNeeded();
-  console.log('numLettersNeeded = ' + numLettersNeeded);
-  // guessedSoFar = []; TODO: delete?
+  // console.log('numLettersNeeded = ' + numLettersNeeded);
   gameOutcome = "";
   userGuess = "";
   wordForScreen = makeInitialWordForScreen();
@@ -152,7 +120,7 @@ function isInArray(value, array) {
 }
 //done
 function makeInitialWordForScreen() {
-  // TODO collapse into makeWordForScreen?
+  // TODO not DRY; collapse into makeWordForScreen
   var tempWord = '';
   for (var i = 0; i < secretWord.length; i++ ) {
     tempWord = tempWord + '_'; // TODO - make more legible, e.g. ' _ '
@@ -175,7 +143,7 @@ function makeTwoButtons(){
 // Done
 function makeWordForScreen(char) {
   // maintains display of word guessed
-  console.log("In makeWordForScreen");
+  // console.log("In makeWordForScreen");
   var tempWord = '';
   for (var i = 0; i < secretWord.length; i++ ) {
       if (secretWord[i] === char) {
@@ -185,7 +153,7 @@ function makeWordForScreen(char) {
         tempWord = tempWord + wordForScreen.charAt(i);
       }
     }
-  console.log(tempWord);
+  // console.log(tempWord);
   wordForScreen = tempWord;
 }
 
@@ -203,70 +171,63 @@ function removeButton() {
 // Done
 function setUpGame() {
   initializeGlobals();
-  console.log('the secret word is: ' + secretWord);
+  // console.log('the secret word is: ' + secretWord);
   // display initial info
-  // updateHeaderText(getNewHeaderText()); TODO: delete
   updateButtonArea(removeButton());
   updateDisplay(getGameInfo());
 }
 
-// Done until refinement time
 function stop() {
   // closes window when player says quit
-  // TODO: say 'ok bye and set timer for a short period.
+  // TODO: say 'ok bye' and set timer for a short period.
   window.close(); 
 }
 
-// TODO: move functionality to updateDisplay and delete
+// TODO: Not DRY; move functionality to updateDisplay and delete
 function updateButtonArea(message) {
   buttonArea.innerHTML = message;
 }
 
-// Done
 function updateCounters(guessResult) {
   //Updates global counters with outcome of guess
-  console.log("In updateCounters");
+  // console.log("In updateCounters");
   lettersGuessed.push(userGuess);
-  lettersGuessed.sort(); // can this be combined with the line above?
+  lettersGuessed.sort();
   // tests for array with info on correct guess
   if (guessResult.length !== 0) {
-    console.log("Updating counters for a correct guess");
+    // console.log("Updating counters for a correct guess");
     numLettersKnown++;
   }
   // array is empty from incorrect guess
   else {
-    console.log("Updating counters for an incorrect guess");
+    // console.log("Updating counters for an incorrect guess");
     wrongGuessesLeft--;
   }
 }
 
 function updateDisplay(message) {
-  // displayArea.innerHTML = ""; TODO: remove
   displayArea.innerHTML = message;
 }
 
 function updateGameState(guessResult) {
-  updateCounters(guessResult); // TODO: add arguments as needed
+  updateCounters(guessResult);
   makeWordForScreen(userGuess);
   updateDisplay(getGameInfo());
 }
 
-// TODO: move functionality to updateDisplay and delete
+// TODO: Not DRY; move functionality to updateDisplay and delete
 function updateHeaderText(message) {
   headerText.innerHTML = message;
 }
 
-// Done
 function yayOrNay(gameStatus) {
   if (gameStatus == 'win') {
     celebrateWin();
-    // setTimeout(askToPlayAgain, 5000);
     askToPlayAgain();
   }
   else if (gameStatus == 'lose') {
     commiserateLoss()
-    console.log("back from commiserateLoss");
-    // setTimeout(askToPlayAgain, 5000);
+    // console.log("back from commiserateLoss");
     askToPlayAgain();
   }
   // if reach here, game is not over
@@ -276,33 +237,36 @@ function yayOrNay(gameStatus) {
 RESUME:
 [x] rip out html for annoying ad and evm products
 [x] update html and js to overwrite the game status
-[ ] run initial test of full game - win case and lose case
-[] review todos and do the must-does; reject is one that needs to be in
-[] review homework assignment to see what else needs to be done in game and outside
+[x] run initial test of full game - win case and lose case
+[x] review todos; remove those that don't point to future work
+[] review homework assignment to see what else needs to be done in game and outside; List in Wunderlist.
 [] finish the game
 [] test
+[] remove this list and commit final copy of game
 [] do the outside-the-game part of the assignment`
 */
 
 // GAME
 //==============================================================================
-// single play of hangman
+
 function main() {
-  console.log("starting game in main");
+  // console.log("starting game in main");
   var guessResult = [];
   var gameStatus = "continue";
   var gameNotOver = true;
   setUpGame();
-  // start looping until single play is over
+  // start looping
     document.onkeyup = function(e) {
-      console.log("it's on!");
+      // console.log("it's on!");
       userGuess = getUserGuess(e);
-      console.log("userGuess is: " + userGuess);
+      // console.log("userGuess is: " + userGuess);
+      // TODO: needs code to reject non-letter characters
+      // TODO: needs code to reject letters that have been guessed before
       guessResult = getResult(userGuess);
-      console.log("guessResult is: " + guessResult);
+      // console.log("guessResult is: " + guessResult);
       updateGameState(guessResult);
       gameStatus = continueOrEndGame();
-      console.log("gameStatus is: " + gameStatus);
+      // console.log("gameStatus is: " + gameStatus);
       yayOrNay(gameStatus);
       // game not over, so loop around
     } // end of onkeyup function
