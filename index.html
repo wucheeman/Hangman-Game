@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <!-- TODO: Delete if not used
   <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-  -->
   <title>Hangman</title>
 </head>
 <body>
@@ -24,7 +22,7 @@
       <!-- Row 2 -->
       <div class="row">
         <div class="col-sm-12 bg-success text-center">
-          <h1>A Game of Skill and Daring!</h1>
+          <h3><em> A Game of Skill and Daring!</em></h3>
         </div>
       </div>
 
@@ -32,8 +30,9 @@
       <div class="row">
           <div class="col-sm-2 bg-primary">
           </div>
-          <div class="col-sm-8">
-              <img class="img-fluid" src="assets/images/dod_1.jpg" alt="Chania">
+          <div class="col-sm-8 mainPic">
+            <!-- TODO: REMOVE -->
+              <!-- <img class="img-fluid" src="assets/images/dod_1.jpg" alt="Day of the Dead skulls"> -->
           </div>
           <div class="col-sm-2 bg-primary">
           </div>
@@ -43,9 +42,9 @@
       <div class="row">
         <div class="col-sm-2 bg-primary">
         </div>
-        <div class="col-sm-8 pt-3 displayArea">
-            <h6>Your mystery word is: <br>Wrong guesses left: <br>Letters guessed so far: </h6>
-            <h6>Click the button and then press a key to give us your best guess at a letter!</h6>
+        <div class="col-sm-8 pt-3 text-center displayArea game">
+            <!-- <h6>Your mystery word is: <br>Wrong guesses left: <br>Letters guessed so far: </h6> -->
+            <h6 id='headerText'>Click the button to start playing!</h6>
         </div>
         <div class="col-sm-2 bg-primary">
         </div>
@@ -58,22 +57,17 @@
           <div id="audioplayer">
             <!-- <audio controls autoplay src="assets/audio/st_james.mp3"/> -->
           </div> <!-- end of #audioplayer -->
-          <div id="game">
+          <div id="buttonArea"> <!-- was game, which wasn't used -->
             <button onclick="main()" class="btn btn-primary btn-block start" type="button">Start Playing!</button>
-          </div>
-        </div>
+          </div> <!-- .buttonArea -->
+        </div> <!-- .col-sm-8 -->
         <div class="col-sm-2 bg-primary"></div>
-      </div>
+      </div> <!-- .row -->
 
       <!-- Row 5 -->
       <div class="row">
           <div class="col-sm-2 bg-primary"></div>
-        <div class="col-sm-4 pt-3 pb-3 text-center">
-          <h4>Your annoying ad could go here.</h4>
-        </div>
-        <div class="col-sm-4 pt-3 pb-3 text-center">
-          <!-- TODO: add a link to a modified portfolio page -->
-          <h4>Click here for more fine EVM products.</h4>
+        <div class="col-sm-8 tiledBackground">
         </div>
         <div class="col-sm-2 bg-primary"></div>
       </div>
@@ -81,7 +75,7 @@
       <!-- Row 6 -->
       <div class="row">
         <div class="col-sm-12 bg-success text-center pt-2 pb-1 ">
-          <p>@copywrite 2018 EVM, Incorporated</p>
+          <p>@copywrite 2018 Known Cheesy Designs, Inc.</p>
         </div>
       </div>
 
