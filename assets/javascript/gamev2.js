@@ -120,14 +120,14 @@ function initializeGlobals() {
   lettersGuessed = [];
   numLettersKnown = 0;
   numLettersNeeded = getNumLettersNeeded();
-  // console.log('numLettersNeeded = ' + numLettersNeeded);
+  // // console.log('numLettersNeeded = ' + numLettersNeeded);
   gameOutcome = "";
   userGuess = "";
   wordForScreen = makeInitialWordForScreen();
   // retrieve wins from localStorage if it is not null
   wins = localStorage.getItem("wins");
   if(wins) {
-    console.log("wins exists!");
+    // console.log("wins exists!");
   }
   else {
     wins = 0;
@@ -165,10 +165,10 @@ function makeWordForScreen(char) {
   for (var i = 0; i < secretWord.length; i++ ) {
       if (secretWord[i] === char) {
         tempWord = replaceAt(tempWord, 2*i, char);
-        console.log('tempWord is now ' + tempWord);
+        // console.log('tempWord is now ' + tempWord);
       }
     }
-  console.log('setting wordForScreen to ' + tempWord);
+  // console.log('setting wordForScreen to ' + tempWord);
   wordForScreen = tempWord;
 }
 
@@ -248,25 +248,6 @@ function yayOrNay(gameStatus) {
   // if reach here, game is not over
 }
 
-/*
-RESUME:
-[x] rip out html for annoying ad and evm products
-[x] update html and js to overwrite the game status
-[x] run initial test of full game - win case and lose case
-[x] review todos; remove those that don't point to future work
-[x] review homework assignment to see what else needs to be done in game and outside.
-[x] finish the game
-    x Wins: (# of times user guessed the word correctly).
-
-    DO NOW: accomplish these next two requirements using the approach in words_n_spaces.html
-    x If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
-    x As the user guesses the correct letters, reveal them: `m a d o _  _ a`
-[] test
-[] final check for uncommented logs or unneeded todos
-[] remove this list and commit final copy of game
-[] do the outside-the-game part of the assignment`
-*/
-
 // GAME
 //==============================================================================
 
@@ -274,7 +255,6 @@ function main() {
   // console.log("starting game in main");
   var guessResult = [];
   var gameStatus = "continue";
-  var gameNotOver = true;
   setUpGame();
   // start looping
     document.onkeyup = function(e) {

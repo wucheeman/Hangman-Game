@@ -23,3 +23,5 @@ Submit Homework
   (1) Didn't force user to continue playing; gave user a choice, with buttons. This is an added feature.
   (2) I use a button for the user to tell the game to start. This is an added feature.
   (3) I use key events to listen for user input of letters as required.
+[] Other comments:
+	() HTML validates
