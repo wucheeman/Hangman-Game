@@ -3,26 +3,26 @@ POST-TEST TASKS
 
 Create a README
 ===============
-[x] Add a `README.md` to your repository describing the project. Review these
+[x] Add a `README.md` to your repository describing the project. Review these:
   * [About READMEs](https://help.github.com/articles/about-readmes/)
   * [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
 
 Add To GitHub Pages and More
 ============================
 [x] Create a GitHub Pages page for the game
-[] Add the game to your portfolio via an active link.
-[] Confirm Github Pages page is accessible from the Internet and no issues
-[] Confirm updated portfolio in GitHub Pages is accessible and no issues
+[x] Add the game to your portfolio via an active link.
+[x] Confirm Github Pages page is accessible from the Internet and no issues
+[x] Confirm updated portfolio in GitHub Pages is accessible and no issues
 
 Submit Homework
 ===============
-[] Provide link to GitHub repo in BCS
-[] Provide link to GitHub Pages in BCS
-[] Provide link to updated portfolio in the comments section of your homework.
-[] Add comment on changes from Requirements:
-  (1) Didn't force user to continue playing; gave user a choice, with buttons. This is an added feature.
+[x] Provide link to GitHub repo in BCS
+[x] Provide link to GitHub Pages in BCS
+[x] Provide link to updated portfolio in the comments section of your homework.
+[x] Add comment on changes from Requirements:
+  (1) Didn't force user to continue playing; gave user a choice, with buttons. This is an added feature. The 'let's quit' button closed the window when the game was local which is nice. Unfortunately, now that it is hosted remotely, it must request the user to close the window instead. 
   (2) I use a button for the user to tell the game to start. This is an added feature.
   (3) I use key events to listen for user input of letters as required.
-[] Other comments:
-	() HTML validates.
-	() CSS validates.
+[x] Other comments:
+   (x) HTML validates.
+   (x) CSS validates.
