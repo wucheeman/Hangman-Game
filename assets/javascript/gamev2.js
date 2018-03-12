@@ -15,13 +15,14 @@ var wins;
 
 // FUNCTIONS
 //==============================================================================
-// Done until single play is completed
+
 function askToPlayAgain() {
       updateButtonArea(makeTwoButtons());
 }
 
 function celebrateWin() {
   // console.log('Yay, you won!');
+  // TODO: Not DRY; consolidate with commiserateLoss into single function
   wins++;
   // play song/update screen
   var endGameSong = document.getElementById("audioplayer");
@@ -53,6 +54,11 @@ function continueOrEndGame() {
   return 'continue';
 }
 
+function replaceAt(aString, index, replacement) {
+  // replaces one or more characters in a string
+  return (aString.substr(0, index) + replacement+ aString.substr(index + replacement.length));
+}
+
 function getGameInfo() {
   //  creates message relaying info on game and prompts for key press
   // console.log("In getGameInfo");
@@ -82,7 +88,7 @@ function getRandomWord() {
   // computer returns randomly selected word
   return words[Math.floor(Math.random() * words.length)]
 }
-// done
+
 function getResult(userGuess) {
   // console.log('getResult was sent ' + userGuess);
   var indexResult = []; // indices where letter appears i secretWord
@@ -101,12 +107,12 @@ function getResult(userGuess) {
     return indexResult;
   }
 }
-// Done
+
 function getUserGuess(event) {
   // gets result of user keypress and normalizes it
   return String.fromCharCode(event.which).toLowerCase();
 }
-// Done
+
 function initializeGlobals() {
   // initializes global vars for individual play of game
   secretWord = getRandomWord();
@@ -126,23 +132,21 @@ function initializeGlobals() {
   else {
     wins = 0;
   }
-
 }
-// Done
+
 function isInArray(value, array) {
   return (array.indexOf(value) > -1);
 }
-//done
+
 function makeInitialWordForScreen() {
   // TODO not DRY; collapse into makeWordForScreen
   var tempWord = '';
   for (var i = 0; i < secretWord.length; i++ ) {
-    tempWord = tempWord + '_'; // TODO - make more legible, e.g. ' _ '
+    tempWord = tempWord + '_ ';
   }
   return tempWord;
 }
 
-// done
 function makeTwoButtons(){
     return(
             '<div class="text-center">' +
@@ -154,24 +158,20 @@ function makeTwoButtons(){
             '</div>'); 
 }
 
-// Done
 function makeWordForScreen(char) {
   // maintains display of word guessed
   // console.log("In makeWordForScreen");
-  var tempWord = '';
+  var tempWord = wordForScreen;
   for (var i = 0; i < secretWord.length; i++ ) {
       if (secretWord[i] === char) {
-        tempWord = tempWord + char;
-      }
-      else {
-        tempWord = tempWord + wordForScreen.charAt(i);
+        tempWord = replaceAt(tempWord, 2*i, char);
+        console.log('tempWord is now ' + tempWord);
       }
     }
-  // console.log(tempWord);
+  console.log('setting wordForScreen to ' + tempWord);
   wordForScreen = tempWord;
 }
 
-// Done
 function playOn() {
   // reloads game so player can play another round
   // stores number of wins locally
@@ -179,12 +179,10 @@ function playOn() {
   window.location.reload();
 }
 
-// done
 function removeButton() {
   return("<button class='btn btn-primary btn-block start' type='button'>Keep Playing!</button>")
 }
 
-// Done
 function setUpGame() {
   initializeGlobals();
   // console.log('the secret word is: ' + secretWord);
@@ -196,12 +194,12 @@ function setUpGame() {
 function stop() {
   // closes window when player says quit
   window.localStorage.removeItem("wins");
-  // TODO: say 'ok bye' and set timer for a short period.
+  // TODO: say 'ok bye' and set timer for a short period so change is not so abrupt.
   window.close(); 
 }
 
-// TODO: Not DRY; move functionality to updateDisplay and delete
 function updateButtonArea(message) {
+  // TODO: Not DRY; move functionality to updateDisplay and delete
   buttonArea.innerHTML = message;
 }
 
@@ -232,8 +230,8 @@ function updateGameState(guessResult) {
   updateDisplay(getGameInfo());
 }
 
-// TODO: Not DRY; move functionality to updateDisplay and delete
 function updateHeaderText(message) {
+  // TODO: Not DRY; move functionality to updateDisplay and delete
   headerText.innerHTML = message;
 }
 
@@ -256,12 +254,15 @@ RESUME:
 [x] update html and js to overwrite the game status
 [x] run initial test of full game - win case and lose case
 [x] review todos; remove those that don't point to future work
-[] review homework assignment to see what else needs to be done in game and outside; List in Wunderlist.
-[] finish the game
-    _ Wins: (# of times user guessed the word correctly).
-    _ If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
-    _ As the user guesses the correct letters, reveal them: `m a d o _  _ a`
+[x] review homework assignment to see what else needs to be done in game and outside.
+[x] finish the game
+    x Wins: (# of times user guessed the word correctly).
+
+    DO NOW: accomplish these next two requirements using the approach in words_n_spaces.html
+    x If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
+    x As the user guesses the correct letters, reveal them: `m a d o _  _ a`
 [] test
+[] final check for uncommented logs or unneeded todos
 [] remove this list and commit final copy of game
 [] do the outside-the-game part of the assignment`
 */
@@ -281,7 +282,7 @@ function main() {
       userGuess = getUserGuess(e);
       // console.log("userGuess is: " + userGuess);
       // TODO: needs code to reject non-letter characters
-      // TODO: needs code to reject letters that have been guessed before
+      // TODO: needs code to reject letters that already have been guessed
       guessResult = getResult(userGuess);
       // console.log("guessResult is: " + guessResult);
       updateGameState(guessResult);
