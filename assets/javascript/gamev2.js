@@ -124,7 +124,7 @@ function initializeGlobals() {
   gameOutcome = "";
   userGuess = "";
   wordForScreen = makeInitialWordForScreen();
-  // retrieve wins from localStorage if it is not null
+  // retrieve wins from localStorage if it is not null and zeroes it if it does
   wins = localStorage.getItem("wins");
   if(wins) {
     // console.log("wins exists!");
@@ -192,10 +192,12 @@ function setUpGame() {
 }
 
 function stop() {
-  // closes window when player says quit
+  // cleans up so user can quit without leaving data.
   window.localStorage.removeItem("wins");
-  // TODO: say 'ok bye' and set timer for a short period so change is not so abrupt.
-  window.close(); 
+  message = '<p>Please close the window</p>';
+  updateDisplay(message);
+  // Javascript can only close the window when game is started from local file.
+  //window.close(); 
 }
 
 function updateButtonArea(message) {
