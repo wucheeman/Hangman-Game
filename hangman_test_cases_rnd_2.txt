@@ -1,0 +1,47 @@
+HANGMAN TEST CASES
+==================
+
+Requirements
+============
+[X] Use key events to listen for the letters that your players will type.
+[] Display the following on the page:
+    r Press any key to get started! (Rejected)
+    _ Wins: (# of times user guessed the word correctly).
+    _ If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
+    _ As the user guesses the correct letters, reveal them: `m a d o _  _ a`.
+    x Number of Guesses Remaining: (# of guesses remaining for the user).
+    x Letters Already Guessed: (Letters the user has guessed, displayed like `L Z Y H`).
+[r] After the user wins/loses the game should automatically choose another word and make the user play it. (Rejected)
+
+Display
+=======
+[] Initial display has all info shown correctly
+[] Display updates correctly as game completes
+[] In words with multiple of same letter, updates correctly
+[] Display is correct when game is won
+[] Display is correct when game is lost
+[] Display is correct when play continues from one game to the next
+[] Display is correct when play ceases and the browser is restarted
+
+Code logic
+==========
+[] Recognizes when a 'good' letter has been guessed and behaves correctly
+[] Recognizes when a 'bad' letter has been guessed and behaves correctly
+[] Handles when same letter in word more than once: only
+[] Stops individual play when player wins or loses
+
+Cleanup
+=======
+[] HTML validates
+[] CSS validates
+[] JS delinted (stretch)
+[x] worthless comments or todos deleted
+
+Hangman Game Bonuses
+====================
+[] Play a sound or song when the user guesses their word correctly, like in our demo.
+[] Write some stylish CSS rules to make a design that fits your game's theme.
+[]**HARD MODE:** Organize your game code as an object, except for the key events to get the letter guessed. This will be a challenge if you haven't coded with JavaScript before, but we encourage anyone already familiar with the language to try this out.
+   _ Save your whole game and its properties in an object.
+   _ Save any of your game's functions as methods, and call them underneath your object declaration using event listeners.
+   _ Don't forget to place your global variables and functions above your object.

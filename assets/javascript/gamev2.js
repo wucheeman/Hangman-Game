@@ -11,6 +11,7 @@ var wordForScreen = '';
 var words = ['bat', 'battlement', 'lemming', 'zebra', 'automobile'];
 var wrongGuessesLeft;
 var userGuess;
+var wins;
 
 // FUNCTIONS
 //==============================================================================
@@ -21,6 +22,7 @@ function askToPlayAgain() {
 
 function celebrateWin() {
   // console.log('Yay, you won!');
+  wins++;
   // play song/update screen
   var endGameSong = document.getElementById("audioplayer");
   // add attribute 'controls' to audio tag to make them visible
@@ -56,9 +58,12 @@ function getGameInfo() {
   // console.log("In getGameInfo");
   return ("<h6>Press a key to make your best guess!</h6>" +
           "<hr>" +
-          "<p>Your mystery word is: " + wordForScreen + "</p><br>" +
-          "<p>Wrong guesses left: " + wrongGuessesLeft + "</p><br>" +
-          "<p>Letters guessed so far: " + lettersGuessed +  "</p>");
+          "<p>Your mystery word is: " + wordForScreen + "</p>" +
+          "<p>Wrong guesses left: " + wrongGuessesLeft + "</p>" +
+          "<p>Letters guessed so far: " + lettersGuessed +  "</p>" +
+          "<hr>" +
+          "<p>Wins so far: " + wins + "</p>");
+
 }
 
 function getNumLettersNeeded(){
@@ -113,6 +118,15 @@ function initializeGlobals() {
   gameOutcome = "";
   userGuess = "";
   wordForScreen = makeInitialWordForScreen();
+  // retrieve wins from localStorage if it is not null
+  wins = localStorage.getItem("wins");
+  if(wins) {
+    console.log("wins exists!");
+  }
+  else {
+    wins = 0;
+  }
+
 }
 // Done
 function isInArray(value, array) {
@@ -160,6 +174,8 @@ function makeWordForScreen(char) {
 // Done
 function playOn() {
   // reloads game so player can play another round
+  // stores number of wins locally
+  window.localStorage.wins = wins;
   window.location.reload();
 }
 
@@ -179,6 +195,7 @@ function setUpGame() {
 
 function stop() {
   // closes window when player says quit
+  window.localStorage.removeItem("wins");
   // TODO: say 'ok bye' and set timer for a short period.
   window.close(); 
 }
@@ -241,6 +258,9 @@ RESUME:
 [x] review todos; remove those that don't point to future work
 [] review homework assignment to see what else needs to be done in game and outside; List in Wunderlist.
 [] finish the game
+    _ Wins: (# of times user guessed the word correctly).
+    _ If the word is `madonna`, display it like this when the game starts: `_ _ _ _ _ _ _`.
+    _ As the user guesses the correct letters, reveal them: `m a d o _  _ a`
 [] test
 [] remove this list and commit final copy of game
 [] do the outside-the-game part of the assignment`
